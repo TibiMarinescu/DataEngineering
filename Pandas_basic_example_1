@@ -1,0 +1,23 @@
+import pandas as pd
+
+family = {'Name': ['Alexandra', 'Andrei','Ramona','Cristian'],
+'Age' : [37,26,20,90],
+'Status' : ['economist','Web developer','Student','Retired'],
+'Hobbies':['cooking','football','shopping','foreign languages']}
+
+Dataframe = pd.DataFrame(family)
+Dataframe
+Dataframe['Name']
+
+#Unique
+Dataframe['Name'].unique()
+
+#Check with comparison operators
+Dataframe['Age']>20
+
+#Save the checking in a variable df1
+df1 = Dataframe[Dataframe['Age']>20]
+df1
+
+#Save the data frame to csv
+df1.to_csv('family_info.csv')
