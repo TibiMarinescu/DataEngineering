@@ -1,0 +1,28 @@
+#Create a dictionary and display its keys alphabetically.
+
+
+dict = {"Tibi": 1993,
+"A": 1995,
+"B": 1996,
+"C": 1997}
+
+k = list(dict.keys())
+print(k)
+print("The keys sorted vertically \n", sorted(k))
+
+#Display both the keys and values sorted in alphabetical order by the key.
+k = sorted(dict.keys())
+print(k)
+v = dict.values()
+for i in k:
+    print(i, ":", dict[i])
+
+#Display both the keys and values sorted in alphabetical order by the value
+dict2 = {}
+list_of_keys = dict.keys()
+list_of_values = sorted(dict.values())
+for lv in list_of_values:
+    for lk in list_of_keys:
+        if dict[lk] == lv:
+            dict2[lk] = lv
+print(dict2)
