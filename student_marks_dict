@@ -1,0 +1,28 @@
+"""The provided code stub will read in a dictionary containing key/value pairs of name:[marks] for a list of students. Print the average of the marks array for the student name provided, showing 2 places after the decimal.
+
+Example
+
+
+
+
+The query_name is 'beta'. beta's average score is """
+n = int(input(" "))
+student_marks = {}
+for qn in range(n):
+    query_name = input(" ")
+    for nm in query_name:
+        line = query_name.split()
+        name, scores = line[0], line[1:]
+        for sc_i, sc_j in enumerate(scores):
+            scores[sc_i] = float(sc_j)
+            scores[sc_i]=round(scores[sc_i],2)
+            student_marks[name] = scores
+y = input(" ")
+for l in student_marks:
+    suma = 0
+    x = student_marks[l]
+    for m in x:
+        suma = suma +m
+    average = suma/len(x)
+    if y == l:
+        print("{:.2f}".format(round(average, 2)))
