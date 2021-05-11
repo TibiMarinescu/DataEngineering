@@ -1,0 +1,8 @@
+def calculator(num1, operator, num2):
+    print(num1, " ", type(num1))
+    print(num2, " ", type(num2))
+    print(operator, " ", type(operator))
+    if num2 == 0:
+        return print("Can\'t divide by 0!")
+    else:
+        return eval(str(num1) + operator + str(num2))
