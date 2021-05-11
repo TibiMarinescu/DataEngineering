@@ -1,0 +1,5 @@
+def stutter(word):
+    return print(word[:2],"...",word[:2],"...",word,"?")
+stutter("incredible")
+stutter("enthusiastic")
+stutter("outstanding")
