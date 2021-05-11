@@ -1,0 +1,10 @@
+def is_curzon(num):
+    x = 2 ** num + 1
+    y = 2 * num + 1
+    if x % y == 0:
+        return True
+    else:
+        return False
+is_curzon(5)
+is_curzon(10)
+is_curzon(14)
