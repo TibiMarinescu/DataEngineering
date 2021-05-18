@@ -1,0 +1,8 @@
+"""Create a function that takes a string and returns the number (count) of vowels contained within it."""
+def count_vowels(word):
+    list = ["a", "e", "i", "o", "u"]
+    vowels_nr = 0
+    for letter in word:
+        if letter in list:
+            vowels_nr = vowels_nr + 1
+    return vowels_nr
