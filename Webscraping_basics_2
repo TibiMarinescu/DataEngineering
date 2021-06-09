@@ -1,0 +1,30 @@
+import requests
+from bs4 import BeautifulSoup
+
+html="""
+<table>
+<tr><td>Pizza Place</td><td>Orders</td>
+<td>Slices </td></tr>
+<tr><td>DominosPizza</td>
+<td>10</td>
+<td>100</td>
+</tr>
+<tr><td>Little Caesars</td><td>12</td><td>144</td></tr>
+</table>
+"""
+
+table = BeautifulSoup(html,'lxml')
+table
+table_row = table.find_all(name='tr')
+table_row
+first_row = table_row[0]
+first_row
+first_row.td
+
+#Iterate through each table cell
+for i,row in enumerate(table_row):
+    print("row", i)
+    cells = row.find_all("td")
+
+    for j, cell in enumerate(cells):
+        print("column", j, "cell", cell)
