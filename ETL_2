@@ -1,0 +1,76 @@
+import glob
+import pandas as pd
+import xml.etree.ElementTree as ET
+from datetime import datetime
+
+tmpfile = "temp.tmp"
+logfile = "logfile.txt"
+targetfile = "transformed_data.csv"
+
+def extract_from_csv(file_to_process):
+    csvfile = pd.read_csv(file_to_process)
+    return csvfile
+
+def extract_from_json(file_to_process):
+    dataframe = pd.read_json(file_to_process)
+    return dataframe
+
+def extract_from_xml(file_to_process):
+    dataframe = pd.Dataframe(columns=["car_model", "year_of_manufacture", "price", "fuel"])
+    tree = ET.parse(file_to_process)
+    root = tree.getroot()
+    for car in root:
+        car_model = car.find("car_model").text
+        year_of_manufacture = int(car.find("year_of_manufacture").text)
+        price = float(car.find("price").text)
+        fuel = car.find("fuel").text
+        dataframe = dataframe.append({"car_model": car_model, "year_of_manufacture":year_of_manufacture, "price":price, "fuel":fuel}, ignore_index = True)
+    return dataframe
+
+def extract():
+    extracted_data = pd.DataFrame(columns = ['car_model', 'year_of_manufacture','price','fuel'])
+
+    #process all csv files
+    for csvfile in glob.glob("dealership_data/*.csv"):
+        extracted_data = extracted_data.append('ADD_FUNCTION_CALL', ignore_index = True)
+    
+    #process all json files
+    for jsonfile in glob.glob("dealership_data/*.json"):
+        extracted_data = extracted_data.append('ADD_FUNCTION_CALL', ignore_index = True)
+
+    #process all xml files
+    for xmlfile in glob.glob("dealership_data/*.xml"):
+        extracted_data = extracted_data.append('ADD_FUNCTION_CALL', ignore_index = True)
+    
+    return extracted_data
+
+#transform
+def transform (data):
+    data['price'] = round(data.price, 2)
+    return data
+
+def load(targetfile, data_to_load):
+    data_to_load.to_csv(targetfile)
+
+def log(message):
+    timestamp_format = '%Y-%h-%d-%H:%M:%S'
+    now = datetime.now()
+    timestamp = now.strftime(timestamp_format)
+    with open("logfile.txt","a") as f:
+        f.write(timestamp + ',' + message + '\n')
+
+log('Started ETL process')
+
+log("Extract")
+extracted_data = extract()
+log("End extract")
+extracted_data
+
+log("Transform")
+transformed_data = transform(extracted_data)
+log("End transform")
+transformed_data
+
+log("Load data")
+data_l = load(targetfile, transformed_data)
+log("End load")
